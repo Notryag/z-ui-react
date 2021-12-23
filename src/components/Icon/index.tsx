@@ -9,12 +9,18 @@ interface IconProps {
 }
 
 export default function Icon(props:IconProps) {
-  let { name, size, style } = props;
+  let { name, size, style, onClick } = props;
+
+  const handleClick = (e) => {
+    onClick && onClick(e)
+  }
+
   return (
     <span>
       <i
         className={classNames('z-icon', 'material-icons', size)}
         style={style}
+        onClick={handleClick}
       >
         {name}
       </i>

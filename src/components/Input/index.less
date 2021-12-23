@@ -1,0 +1,27 @@
+.z-input {
+  display: inline-block;
+  position: relative;
+  .z-input-inner {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    width: 320px;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    border: 1px solid rgb(217, 217, 217);
+    display: inline-block;
+    line-height: 1.5;
+    outline: none;
+    transition: box-shadow 0.3s, border 0.3s;
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.2);
+    }
+    &:hover {
+      border-color: rgb(64, 169, 255);
+    }
+    &:focus {
+      border-color: rgb(64, 169, 255);
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+}

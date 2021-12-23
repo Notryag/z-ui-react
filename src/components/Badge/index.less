@@ -1,0 +1,42 @@
+.z-badge {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  .z-badge-status-dot {
+    display: inline-flex;
+    align-items: center;
+    .dot {
+      margin-right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 6px;
+    }
+  }
+  .z-badge-inner {
+    position: absolute;
+    top:0;
+    right: 0;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 20px;
+
+    padding: 0 6px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px #fff;
+    background-color: red;
+    transform: translate(50%,-50%);
+    transform-origin: 100% 0%;
+    &.z-badge-dot {
+      min-width: 6px;
+      width: 6px;
+      height: 6px;
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
