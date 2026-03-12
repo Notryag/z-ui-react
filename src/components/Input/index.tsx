@@ -1,9 +1,23 @@
 import classNames from 'classnames';
-import React, { useRef, useEffect } from 'react';
+import React, { ChangeEventHandler, CSSProperties, ReactNode, useEffect, useRef } from 'react';
 import Icon from '../Icon';
 import './index.less';
 
-export default function Input(props) {
+interface InputProps {
+  icon?: ReactNode;
+  defaultValue?: string;
+  id?: string;
+  className?: string;
+  type?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  style?: CSSProperties;
+  autoFocus?: boolean;
+  placeholder?: string;
+  onIconClick?: (value: string) => void;
+}
+
+export default function Input(props: InputProps) {
   const {
     icon,
     defaultValue,
@@ -17,15 +31,17 @@ export default function Input(props) {
     placeholder = '请输入内容',
     onIconClick,
   } = props;
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    autoFocus && inputRef.current.focus()
-  })
-  const handleChange = (e) => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+    }
+  }, [autoFocus]);
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onChange && onChange(e.target.value)
   }
   const handleIconClick = () => {
-    onIconClick && onIconClick(inputRef.current.value)
+    onIconClick && onIconClick(inputRef.current?.value ?? '')
   }
 
   return (
@@ -36,7 +52,7 @@ export default function Input(props) {
         className={classNames('z-input-inner',className)}
         type={type}
         style={style}
-        value={value || typeof value === 'undefined' ? defaultValue : ''}
+        value={value ?? defaultValue}
         placeholder={placeholder}
         onChange={handleChange}
       />

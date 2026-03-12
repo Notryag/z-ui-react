@@ -11,10 +11,12 @@ interface TagProps {
 
 export default function Tag(props: TagProps) {
   let { children, color, closable, onClose } = props;
-  let tag = useRef(null);
+  let tag = useRef<HTMLDivElement>(null);
   const handleClose = () => {
     onClose && onClose();
-    tag.current.style.display = 'none';
+    if (tag.current) {
+      tag.current.style.display = 'none';
+    }
   };
 
   return (

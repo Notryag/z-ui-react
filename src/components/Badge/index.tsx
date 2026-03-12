@@ -9,7 +9,22 @@ const colorArr = {
   processing: '#1890ff',
 };
 
-export default function Badge(props) {
+type BadgeStatus = keyof typeof colorArr;
+
+interface BadgeProps {
+  color?: string;
+  count?: number;
+  dot?: boolean;
+  offset?: [number, number];
+  overflowCount?: number;
+  showZero?: boolean;
+  status?: BadgeStatus;
+  text?: React.ReactNode;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}
+
+export default function Badge(props: BadgeProps) {
   const {
     color,
     count = 0,
@@ -22,6 +37,10 @@ export default function Badge(props) {
     style,
     children,
   } = props;
+  const displayCount =
+    typeof overflowCount === 'number' && count > overflowCount
+      ? `${overflowCount}+`
+      : count;
   return (
     <div className="z-badge">
       {status ? (
@@ -45,7 +64,7 @@ export default function Badge(props) {
               display: !showZero && !count ? 'none' : 'inline-block',
               ...style
             }}
-          >{count}</span>
+          >{dot ? '' : displayCount}</span>
           {children}
         </div>
       )}

@@ -12,14 +12,24 @@ import './index.less'
  * @param {onChange} func 状态切换时的文本
  * @param {size} string 组件的尺寸
  */
-export default function Switch(props) {
+interface SwitchProps {
+  color?: string;
+  className?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  onText?: string;
+  offText?: string;
+  onChange?: (checked: boolean) => void;
+  size?: 'small' | 'large';
+}
+
+export default function Switch(props: SwitchProps) {
   let { color = '#09f', className, checked, disabled, onText, offText, onChange, size } = props
-  let handleChange = (e) => {
-    e.persist()
+  let handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(e.target.checked)
   }
   return <div className={classnames('z-switch', className)}>
-    <label className={classnames('z-switch-inner', size)} style={{pointerEvents: disabled ? 'none' : 'default', cursor: disabled ? 'not-allowed' : 'pointer'}}>
+    <label className={classnames('z-switch-inner', size)} style={{pointerEvents: disabled ? 'none' : 'auto', cursor: disabled ? 'not-allowed' : 'pointer'}}>
       <input type='checkbox' checked={checked} onChange={handleChange} />
       <span
         className="z-switch-animating"

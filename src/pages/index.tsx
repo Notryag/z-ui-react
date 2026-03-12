@@ -1,4 +1,5 @@
-import styles from './index.less';
+import { useState } from 'react';
+import styles from './index.module.less';
 import Button from '@/components/Button';
 import Progress from '@/components/Progress';
 import Tag from '@/components/Tag';
@@ -9,15 +10,12 @@ import Input from '@/components/Input';
 import Alert from '@/components/Alert';
 import Badge from '@/components/Badge';
 import Switch from '@/components/Switch';
-
-
-import { useState } from 'react';
 export default function IndexPage() {
   const [percent, setPrecent] = useState(10);
   const [visible, setVisible] = useState(false);
   return (
-    <div>
-      <div>
+    <div className={styles.page}>
+      <div className={styles.section}>
         <Button>default</Button>
         <Button className={styles.btn} type="warning">
           warning
@@ -49,7 +47,7 @@ export default function IndexPage() {
         </Button>
       </div>
 
-      <div>
+      <div className={styles.section}>
         <Progress percent={percent} width={240} autoHidden />
 
         <Progress
@@ -61,7 +59,7 @@ export default function IndexPage() {
           ]}
         />
       </div>
-      <div>
+      <div className={styles.section}>
         <Tag color="#06c">标签</Tag>
         <Tag color="red">标签</Tag>
         <Tag color="orange">标签</Tag>
@@ -72,35 +70,45 @@ export default function IndexPage() {
         </Tag>
         <Tag closable>标签</Tag>
       </div>
-      <div>
-        {/* <Empty /> */}
+      <div className={styles.section}>
+        <Empty />
       </div>
-      <div>
+      <div className={styles.section}>
         <Icon name="edit" />
         <Icon name="edit" />
         <Icon name="edit" />
         <Icon name="edit" />
       </div>
-      <div>
-
-        <Drawer visible={visible} onClose={() => setVisible(false)}/>
-        <Button onClick={() => setVisible(true)}>打开抽屉{JSON.stringify(visible)}</Button>
+      <div className={styles.section}>
+        <Drawer visible={visible} onClose={() => setVisible(false)} />
+        <Button onClick={() => setVisible(true)}>
+          打开抽屉{JSON.stringify(visible)}
+        </Button>
       </div>
-      <div>
+      <div className={styles.section}>
         <Input></Input>
         <Input autoFocus></Input>
-        <Input icon={<Icon name="edit" />} onIconClick={(v) => {alert(`输入的是: ${v}`)}} />
+        <Input
+          icon={<Icon name="edit" />}
+          onIconClick={(v: string) => {
+            alert(`输入的是: ${v}`);
+          }}
+        />
       </div>
-      <div>
+      <div className={styles.section}>
         <Alert message="出票成功：您的小票已出，快来火车站获取吧～" type="success" />
         <Alert message="出票错误：react错误，返回首页～" type="error" />
         <Alert message="出票通知：您的小票已出，快来火车站获取吧～～" type="info" />
-        <Alert message="温馨提示：您的小票已出，快来火车站获取吧～" closeable/>
+        <Alert message="温馨提示：您的小票已出，快来火车站获取吧～" closeable />
       </div>
-      <div>
-        <Badge  dot>Node</Badge> <br />
-        <Badge count={129} overflowCount={99}>react+vue</Badge><span style={{marginLeft:"60px"}}></span>
-        <Badge count={129} overflowCount={99} style={{backgroundColor: 'green'}}>Node</Badge> <br />
+      <div className={styles.section}>
+        <Badge dot>Node</Badge> <br />
+        <Badge count={129} overflowCount={99}>react+vue</Badge>
+        <span style={{ marginLeft: '60px' }}></span>
+        <Badge count={129} overflowCount={99} style={{ backgroundColor: 'green' }}>
+          Node
+        </Badge>{' '}
+        <br />
         <br />
         <Badge status="success" text="成功"></Badge>
         <br />
@@ -110,9 +118,11 @@ export default function IndexPage() {
         <br />
         <Badge status="warning" text="警告"></Badge>
       </div>
-      <div>
-        <Switch size="small" /> <br /><br />
-        <Switch /> <br /><br />
+      <div className={styles.section}>
+        <Switch size="small" /> <br />
+        <br />
+        <Switch /> <br />
+        <br />
         <Switch size="large" />
       </div>
     </div>

@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types'
 import './index.less'
 
 // 升序排序
-let sortArr = arr => arr.sort((a,b) => a[0] - b[0])
+type StatusScope = [number, string][];
+
+const sortArr = (arr: StatusScope) => arr.sort((a, b) => a[0] - b[0]);
 
 // 检测值所对应的进度条颜色状态
-function checkStatus(scope, val:number, defaultColor:string) {
+function checkStatus(scope: StatusScope, val:number, defaultColor:string) {
   val = +val
   // 从小到大排序
   sortArr(scope)
@@ -43,8 +44,8 @@ interface baseProps {
   autoHidden?: boolean,
   textAlign?: string,
   hiddenText?: boolean,
-  width?:any,
-  statusScope?: any,
+  width?: number | string,
+  statusScope?: StatusScope,
   textColor?:string,
 
 }

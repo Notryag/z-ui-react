@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './index.less';
-import ReactDOM from 'react-dom'
-function Drawer(props) {
+import ReactDOM from 'react-dom';
+
+interface DrawerProps {
+  visible?: boolean;
+  zIndex?: number;
+  onClose?: () => void;
+  children?: React.ReactNode;
+  width?: string | number;
+  placement?: 'left' | 'right';
+  drawerStyle?: React.CSSProperties;
+  destroyOnClose?: boolean;
+  closeable?: boolean;
+  mask?: boolean;
+  maskClosable?: boolean;
+}
+
+function Drawer(props: DrawerProps) {
   let {
     zIndex = 10,
     onClose,
@@ -20,21 +35,16 @@ function Drawer(props) {
 
   const handleClose = () => {
     onClose && onClose();
-    setVisible((prev) => {
-      return false;
-    });
+    setVisible(false);
     if (destroyOnClose) {
       setIsDesChild(true);
     }
   };
   useEffect(() => {
-
-    setVisible(() => {
-      return props.visible;
-    });
+    setVisible(props.visible);
   }, [props.visible]);
 
-  const childDom =  (
+  const childDom = (
     <div
       className="z-drawer-wrap"
       style={{
@@ -45,13 +55,13 @@ function Drawer(props) {
       {!!mask && (
         <div
           className="z-drawer-mask"
-          onClick={maskClosable ? handleClose : null}
+          onClick={maskClosable ? handleClose : undefined}
         ></div>
       )}
       <div
         className="z-drawer-content"
         style={{
-          width,
+          width: typeof width === 'number' ? `${width}px` : width,
           [placement]: visible ? 0 : '-100%',
           ...drawerStyle,
         }}
@@ -64,7 +74,7 @@ function Drawer(props) {
         )}
       </div>
     </div>
-  )
- return ReactDOM.createPortal(childDom, document.body)
+  );
+  return ReactDOM.createPortal(childDom, document.body);
 }
-export default Drawer
+export default Drawer;

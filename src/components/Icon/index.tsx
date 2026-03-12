@@ -1,17 +1,18 @@
-import { CSSProperties } from '@umijs/renderer-react/node_modules/@types/react';
+import { CSSProperties, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import React from 'react';
 import './index.less';
 interface IconProps {
-  name:string,
-  size?:string,
-  style?: CSSProperties
+  name: string;
+  size?: string;
+  style?: CSSProperties;
+  onClick?: MouseEventHandler<HTMLElement>;
 }
 
 export default function Icon(props:IconProps) {
   let { name, size, style, onClick } = props;
 
-  const handleClick = (e) => {
+  const handleClick: MouseEventHandler<HTMLElement> = (e) => {
     onClick && onClick(e)
   }
 

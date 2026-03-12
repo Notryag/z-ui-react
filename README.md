@@ -1,15 +1,14 @@
-# umi project
+# z-ui-react
 
-## Getting Started
-
-Install dependencies,
+## Development
 
 ```bash
-$ yarn
+pnpm install
+pnpm dev
 ```
 
-Start the dev server,
+## Build
 
 ```bash
-$ yarn start
+pnpm build
 ```
