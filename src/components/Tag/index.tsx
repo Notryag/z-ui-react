@@ -1,29 +1,33 @@
 import classNames from 'classnames';
-import React, { useRef } from 'react';
+import { ReactNode, useState } from 'react';
 import './index.less';
 
 interface TagProps {
   color?: string;
   closable?: boolean;
-  children?: React.ReactNode;
-  onClose?: any
+  children?: ReactNode;
+  onClose?: () => void;
 }
 
 export default function Tag(props: TagProps) {
-  let { children, color, closable, onClose } = props;
-  let tag = useRef<HTMLDivElement>(null);
+  const { children, color, closable, onClose } = props;
+  const [visible, setVisible] = useState(true);
+
   const handleClose = () => {
-    onClose && onClose();
-    if (tag.current) {
-      tag.current.style.display = 'none';
+    if (onClose) {
+      onClose();
     }
+    setVisible(false);
   };
+
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div
       className={classNames('zTag', color ? 'zTagHasColor' : '')}
       style={{ backgroundColor: color }}
-      ref={tag}
     >
       {children}
       {closable ? (

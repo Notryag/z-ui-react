@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import './index.less';
 import ReactDOM from 'react-dom';
 
@@ -6,10 +6,10 @@ interface DrawerProps {
   visible?: boolean;
   zIndex?: number;
   onClose?: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   width?: string | number;
   placement?: 'left' | 'right';
-  drawerStyle?: React.CSSProperties;
+  drawerStyle?: CSSProperties;
   destroyOnClose?: boolean;
   closeable?: boolean;
   mask?: boolean;
@@ -17,7 +17,7 @@ interface DrawerProps {
 }
 
 function Drawer(props: DrawerProps) {
-  let {
+  const {
     zIndex = 10,
     onClose,
     children,
@@ -27,22 +27,15 @@ function Drawer(props: DrawerProps) {
     destroyOnClose,
     closeable = true,
     mask = true,
+    visible = false,
     maskClosable,
   } = props;
 
-  let [visible, setVisible] = useState(props.visible);
-  let [isDesChild, setIsDesChild] = useState(false);
-
   const handleClose = () => {
-    onClose && onClose();
-    setVisible(false);
-    if (destroyOnClose) {
-      setIsDesChild(true);
+    if (onClose) {
+      onClose();
     }
   };
-  useEffect(() => {
-    setVisible(props.visible);
-  }, [props.visible]);
 
   const childDom = (
     <div
@@ -66,7 +59,7 @@ function Drawer(props: DrawerProps) {
           ...drawerStyle,
         }}
       >
-        {isDesChild ? null : children}
+        {visible || !destroyOnClose ? children : null}
         {!!closeable && (
           <span className="z-btn-close" onClick={handleClose}>
             X

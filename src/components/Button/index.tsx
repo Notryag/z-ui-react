@@ -11,7 +11,7 @@ interface BaseButtonProps{
 }
 
 export default function Button(props:BaseButtonProps) {
-  let { children, onClick, className, type, shape, block} = props
+  const { children, onClick, className, type, shape, block} = props
   return (
     <div className={classnames('ZButton', 'ripple', type, shape, block ? 'block' : '', className)} onClick={onClick}>
       {children}

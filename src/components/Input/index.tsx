@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import React, { ChangeEventHandler, CSSProperties, ReactNode, useEffect, useRef } from 'react';
-import Icon from '../Icon';
+import { ChangeEventHandler, CSSProperties, ReactNode, useEffect, useRef } from 'react';
 import './index.less';
 
 interface InputProps {
@@ -38,25 +37,30 @@ export default function Input(props: InputProps) {
     }
   }, [autoFocus]);
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange && onChange(e.target.value)
-  }
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  };
   const handleIconClick = () => {
-    onIconClick && onIconClick(inputRef.current?.value ?? '')
-  }
+    if (onIconClick) {
+      onIconClick(inputRef.current?.value ?? '');
+    }
+  };
 
   return (
     <div className={classNames('z-input')}>
       <input
         id={id}
         ref={inputRef}
-        className={classNames('z-input-inner',className)}
+        className={classNames('z-input-inner', className)}
         type={type}
         style={style}
-        value={value ?? defaultValue}
+        value={value}
+        defaultValue={value === undefined ? defaultValue : undefined}
         placeholder={placeholder}
         onChange={handleChange}
       />
-      {!!icon && <span className="z-input-icon" onClick={handleIconClick}>{ icon }</span>}
+      {!!icon && <span className="z-input-icon" onClick={handleIconClick}>{icon}</span>}
     </div>
   );
 }

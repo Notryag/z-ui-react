@@ -25,7 +25,9 @@ export default function Alert(props: AlertProps) {
   const [visible, setVisible] = useState(true);
   const handleClick = () => {
     setVisible(false);
-    onClose && onClose();
+    if (onClose) {
+      onClose();
+    }
   };
   return visible ? (
     <div

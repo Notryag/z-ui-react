@@ -10,11 +10,13 @@ interface IconProps {
 }
 
 export default function Icon(props:IconProps) {
-  let { name, size, style, onClick } = props;
+  const { name, size, style, onClick } = props;
 
   const handleClick: MouseEventHandler<HTMLElement> = (e) => {
-    onClick && onClick(e)
-  }
+    if (onClick) {
+      onClick(e);
+    }
+  };
 
   return (
     <span>

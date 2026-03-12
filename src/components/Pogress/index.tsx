@@ -50,7 +50,7 @@ interface baseProps {
 
 }
 function Progress(props:baseProps) {
-  let {
+  const {
     themeColor = '#06f',
     percent = 0,
     autoHidden = false,

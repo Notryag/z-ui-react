@@ -9,7 +9,7 @@ interface EmptyProps {
 }
 
 export default function Page(props:EmptyProps) {
-  let {text, className} = props
+  const {text, className} = props
   return (
     <div className={classNames('emptyWrap',className)}>
       <div className='emptyInner'>

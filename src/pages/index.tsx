@@ -11,7 +11,7 @@ import Alert from '@/components/Alert';
 import Badge from '@/components/Badge';
 import Switch from '@/components/Switch';
 export default function IndexPage() {
-  const [percent, setPrecent] = useState(10);
+  const [percent] = useState(10);
   const [visible, setVisible] = useState(false);
   return (
     <div className={styles.page}>

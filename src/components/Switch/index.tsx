@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import classnames from 'classnames'
 import './index.less'
 
@@ -24,10 +23,12 @@ interface SwitchProps {
 }
 
 export default function Switch(props: SwitchProps) {
-  let { color = '#09f', className, checked, disabled, onText, offText, onChange, size } = props
-  let handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(e.target.checked)
-  }
+  const { color = '#09f', className, checked, disabled, onText, offText, onChange, size } = props
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e.target.checked);
+    }
+  };
   return <div className={classnames('z-switch', className)}>
     <label className={classnames('z-switch-inner', size)} style={{pointerEvents: disabled ? 'none' : 'auto', cursor: disabled ? 'not-allowed' : 'pointer'}}>
       <input type='checkbox' checked={checked} onChange={handleChange} />
