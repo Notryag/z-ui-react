@@ -1,10 +1,29 @@
 {
+  "name": "z-ui-react",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.30.3",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/lib/index.mjs",
+  "types": "./dist/lib/index.d.ts",
+  "files": [
+    "dist/lib"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.mjs",
+      "require": "./dist/lib/index.js"
+    },
+    "./style.css": "./dist/lib/index.css",
+    "./index.css": "./dist/lib/index.css"
+  },
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vite build",
+    "build": "pnpm build:demo && pnpm build:lib",
+    "build:demo": "vite build",
+    "build:lib": "vite build --mode library && tsc -p tsconfig.build.json",
     "preview": "vite preview",
     "lint": "eslint .",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -23,9 +42,7 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "material-design-icons": "^3.0.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "material-design-icons": "^3.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -48,6 +65,12 @@
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "yorkie": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }
